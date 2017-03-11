@@ -73,7 +73,7 @@ minetest.register_node("trample_path:dirt", {
 	description = "Dirt",
 	drawtype = 'nodebox',
 	tiles = {"default_dirt.png"},
-	groups = {crumbly = 3, soil = 1},
+	groups = {crumbly = 3, soil = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_dirt_defaults(),
 	drop = {
 		max_items = 1,
@@ -93,7 +93,7 @@ minetest.register_node("trample_path:gravel", {
 	description = "Gravel",
 	drawtype = 'nodebox',
 	tiles = {"default_gravel.png"},
-	groups = {crumbly = 2, falling_node = 1},
+	groups = {crumbly = 2, falling_node = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_gravel_defaults(),
 	drop = {
 		max_items = 1,
@@ -116,7 +116,8 @@ minetest.register_node("trample_path:dirt_with_snow", {
 	tiles = {"default_snow.png", "default_dirt.png",
 		{name = "default_dirt.png^default_snow_side.png",
 			tileable_vertical = false}},
-	groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1, snowy = 1},
+	groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1, snowy = 1,
+			not_in_creative_inventory = 1},
 	drop = 'default:dirt',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_snow_footstep", gain = 0.15},
@@ -134,7 +135,7 @@ minetest.register_node("trample_path:sand", {
 	description = "Sand",
 	drawtype = 'nodebox',
 	tiles = {"default_sand.png"},
-	groups = {crumbly = 3, falling_node = 1, sand = 1},
+	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_sand_defaults(),
 	node_box = {
 		type = "fixed",
@@ -148,7 +149,7 @@ minetest.register_node("trample_path:desert_sand", {
 	description = "Desert Sand",
 	drawtype = 'nodebox',
 	tiles = {"default_desert_sand.png"},
-	groups = {crumbly = 3, falling_node = 1, sand = 1},
+	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_sand_defaults(),
 	node_box = {
 		type = "fixed",
@@ -162,7 +163,7 @@ minetest.register_node("trample_path:silver_sand", {
 	description = "Silver Sand",
 	drawtype = 'nodebox',
 	tiles = {"default_silver_sand.png"},
-	groups = {crumbly = 3, falling_node = 1, sand = 1},
+	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_sand_defaults(),
 	node_box = {
 		type = "fixed",
@@ -188,7 +189,8 @@ minetest.register_node("trample_path:snow", {
 			{-0.5, -0.5, -0.5, 0.5, -0.25 - 1/16, 0.5},
 		},
 	},
-	groups = {crumbly = 3, falling_node = 1, puts_out_fire = 1, snowy = 1},
+	groups = {crumbly = 3, falling_node = 1, puts_out_fire = 1, snowy = 1,
+			not_in_creative_inventory = 1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_snow_footstep", gain = 0.15},
 		dug = {name = "default_snow_footstep", gain = 0.2},
@@ -207,7 +209,8 @@ minetest.register_node("trample_path:snowblock", {
 	description = "Snow Block",
 	drawtype = 'nodebox',
 	tiles = {"default_snow.png"},
-	groups = {crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1},
+	groups = {crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1,
+			not_in_creative_inventory = 1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_snow_footstep", gain = 0.15},
 		dug = {name = "default_snow_footstep", gain = 0.2},

@@ -112,6 +112,7 @@ minetest.register_node("trample_path:gravel", {
 
 minetest.register_node("trample_path:dirt_with_snow", {
 	description = "Dirt with Snow",
+	paramtype = "light",
 	drawtype = 'nodebox',
 	tiles = {"default_snow.png", "default_dirt.png",
 		{name = "default_dirt.png^default_snow_side.png",
@@ -133,6 +134,7 @@ minetest.register_node("trample_path:dirt_with_snow", {
 
 minetest.register_node("trample_path:sand", {
 	description = "Sand",
+	paramtype = "light",
 	drawtype = 'nodebox',
 	tiles = {"default_sand.png"},
 	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
@@ -147,6 +149,7 @@ minetest.register_node("trample_path:sand", {
 
 minetest.register_node("trample_path:desert_sand", {
 	description = "Desert Sand",
+	paramtype = "light",
 	drawtype = 'nodebox',
 	tiles = {"default_desert_sand.png"},
 	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
@@ -161,6 +164,7 @@ minetest.register_node("trample_path:desert_sand", {
 
 minetest.register_node("trample_path:silver_sand", {
 	description = "Silver Sand",
+	paramtype = "light",
 	drawtype = 'nodebox',
 	tiles = {"default_silver_sand.png"},
 	groups = {crumbly = 3, falling_node = 1, sand = 1, not_in_creative_inventory = 1},
@@ -207,6 +211,7 @@ minetest.register_node("trample_path:snow", {
 
 minetest.register_node("trample_path:snowblock", {
 	description = "Snow Block",
+	paramtype = "light",
 	drawtype = 'nodebox',
 	tiles = {"default_snow.png"},
 	groups = {crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1,

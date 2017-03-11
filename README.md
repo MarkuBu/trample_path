@@ -1,1 +1,1 @@
-# trample_path
+# Trample Path mod for Minetest

@@ -1,4 +1,6 @@
 
+local enable_path_while_walk = true
+
 --
 -- List of shovels
 --
@@ -12,15 +14,33 @@ local shovels = {
 		"default:shovel_diamond",
 }
 
+--
+-- List of nodes
+--
+
 local nodes = {}
 nodes["default:dirt"] = {count = 6, replace = "trample_path:dirt"}
 nodes["default:dirt_with_grass"] = {count = 6, replace = "default:dirt"}
+nodes["default:dirt_with_rainforest_litter"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_snow"] = {count = 3, replace = "trample_path:dirt_with_snow"}
 nodes["default:sand"] = {count = 4, replace = "trample_path:sand"}
 nodes["default:desert_sand"] = {count = 4, replace = "trample_path:desert_sand"}
 nodes["default:silver_sand"] = {count = 4, replace = "trample_path:silver_sand"}
 nodes["default:gravel"] = {count = 10, replace = "trample_path:gravel"}
 nodes["default:snow"] = {count = 2, replace = "trample_path:snow"}
+nodes["default:grass_1"] = {count = 1, replace = "air"}
+nodes["default:grass_2"] = {count = 1, replace = "air"}
+nodes["default:grass_3"] = {count = 2, replace = "air"}
+nodes["default:grass_4"] = {count = 2, replace = "air"}
+nodes["default:grass_5"] = {count = 3, replace = "air"}
+nodes["default:flowers:rose"] = {count = 1, replace = "air"}
+nodes["default:flowers:tulip"] = {count = 1, replace = "air"}
+nodes["default:flowers:dandelion_yellow"] = {count = 1, replace = "air"}
+nodes["default:flowers:geranium"] = {count = 1, replace = "air"}
+nodes["default:flowers:viola"] = {count = 1, replace = "air"}
+nodes["default:flowers:dandelion_white"] = {count = 1, replace = "air"}
+nodes["default:flowers:mushroom_red"] = {count = 1, replace = "air"}
+nodes["default:flowers:mushroom_brown"] = {count = 1, replace = "air"}
 
 --
 -- Overwrite items
@@ -44,22 +64,8 @@ for _, shovel in ipairs(shovels) do
 					return itemstack
 				end
 
-				if name == "default:dirt" or name == "default:dirt_with_grass"  or
-						name == "default:dirt_with_rainforest_litter"  or
-						name == "default:dirt_with_dry_grass" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:dirt"})
-				elseif name == "default:sand" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:sand"})
-				elseif name == "default:desert_sand" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:desert_sand"})
-				elseif name == "default:silver_sand" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:silver_sand"})
-				elseif name == "default:gravel" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:gravel"})
-				elseif name == "default:dirt_with_snow" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:dirt_with_snow"})
-				elseif name == "default:snow" then
-					minetest.set_node(pointed_thing.under, {name = "trample_path:snow"})
+				if nodes[name] then
+					minetest.set_node(pointed_thing.under, {name = nodes[node.name].replace})
 				else
 					return itemstack
 				end
@@ -84,29 +90,31 @@ end
 
 local lastpos = {}
 
-minetest.register_globalstep(function(dtime)
-	local players = minetest.get_connected_players()
-	for id, player in ipairs(players) do
-		local pos = vector.round(player:get_pos())
-		local player_name = player:get_player_name()
+if enable_path_while_walk then
+	minetest.register_globalstep(function(dtime)
+		local players = minetest.get_connected_players()
+		for id, player in ipairs(players) do
+			local pos = vector.round(player:get_pos())
+			local player_name = player:get_player_name()
 
-		if not lastpos[player_name] then
-			lastpos[player_name] = pos
-		end
-
-		if not vector.equals(pos, lastpos[player_name]) then
-			local under = {x = pos.x, y = pos.y - 1, z = pos.z}
-			local node = minetest.get_node(pos)
-			local node_under = minetest.get_node(under)
-			if node.name == "default:snow" then
-				replace_node(node, pos)
-			elseif nodes[node_under.name] then
-				replace_node(node_under, under)
+			if not lastpos[player_name] then
+				lastpos[player_name] = pos
 			end
-			lastpos[player_name] = pos
+
+			if not vector.equals(pos, lastpos[player_name]) then
+				local under = {x = pos.x, y = pos.y - 1, z = pos.z}
+				local node = minetest.get_node(pos)
+				local node_under = minetest.get_node(under)
+				if nodes[node.name] then
+					replace_node(node, pos)
+				elseif nodes[node_under.name] then
+					replace_node(node_under, under)
+				end
+				lastpos[player_name] = pos
+			end
 		end
-	end
-end)
+	end)
+end
 
 --
 -- Nodes

@@ -12,6 +12,16 @@ local shovels = {
 		"default:shovel_diamond",
 }
 
+local nodes = {}
+nodes["default:dirt"] = {count = 6, replace = "trample_path:dirt"}
+nodes["default:dirt_with_grass"] = {count = 6, replace = "default:dirt"}
+nodes["default:dirt_with_snow"] = {count = 3, replace = "trample_path:dirt_with_snow"}
+nodes["default:sand"] = {count = 4, replace = "trample_path:sand"}
+nodes["default:desert_sand"] = {count = 4, replace = "trample_path:desert_sand"}
+nodes["default:silver_sand"] = {count = 4, replace = "trample_path:silver_sand"}
+nodes["default:gravel"] = {count = 10, replace = "trample_path:gravel"}
+nodes["default:snow"] = {count = 2, replace = "trample_path:snow"}
+
 --
 -- Overwrite items
 --
@@ -64,6 +74,39 @@ for _, shovel in ipairs(shovels) do
 	end
 end
 
+local function replace_node(node, pos)
+	if node.param2 > nodes[node.name].count then
+		minetest.swap_node(pos, {name = nodes[node.name].replace})
+	else
+		minetest.swap_node(pos, {name = node.name, param2 = node.param2 + 1})
+	end
+end
+
+local lastpos = {}
+
+minetest.register_globalstep(function(dtime)
+	local players = minetest.get_connected_players()
+	for id, player in ipairs(players) do
+		local pos = vector.round(player:get_pos())
+		local player_name = player:get_player_name()
+
+		if not lastpos[player_name] then
+			lastpos[player_name] = pos
+		end
+
+		if not vector.equals(pos, lastpos[player_name]) then
+			local under = {x = pos.x, y = pos.y - 1, z = pos.z}
+			local node = minetest.get_node(pos)
+			local node_under = minetest.get_node(under)
+			if node.name == "default:snow" then
+				replace_node(node, pos)
+			elseif nodes[node_under.name] then
+				replace_node(node_under, under)
+			end
+			lastpos[player_name] = pos
+		end
+	end
+end)
 
 --
 -- Nodes

@@ -21,6 +21,7 @@ local shovels = {
 local nodes = {}
 nodes["default:dirt"] = {count = 6, replace = "trample_path:dirt"}
 nodes["default:dirt_with_grass"] = {count = 6, replace = "default:dirt"}
+nodes["default:dirt_with_dry_grass"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_rainforest_litter"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_snow"] = {count = 3, replace = "trample_path:dirt_with_snow"}
 nodes["default:sand"] = {count = 4, replace = "trample_path:sand"}
@@ -33,6 +34,13 @@ nodes["default:grass_2"] = {count = 1, replace = "air"}
 nodes["default:grass_3"] = {count = 2, replace = "air"}
 nodes["default:grass_4"] = {count = 2, replace = "air"}
 nodes["default:grass_5"] = {count = 3, replace = "air"}
+nodes["default:dry_grass_1"] = {count = 1, replace = "air"}
+nodes["default:dry_grass_2"] = {count = 1, replace = "air"}
+nodes["default:dry_grass_3"] = {count = 2, replace = "air"}
+nodes["default:dry_grass_4"] = {count = 2, replace = "air"}
+nodes["default:dry_grass_5"] = {count = 3, replace = "air"}
+nodes["default:junglegrass"] = {count = 3, replace = "air"}
+nodes["default:dry_shrub"] = {count = 2, replace = "air"}
 nodes["flowers:rose"] = {count = 1, replace = "air"}
 nodes["flowers:tulip"] = {count = 1, replace = "air"}
 nodes["flowers:dandelion_yellow"] = {count = 1, replace = "air"}

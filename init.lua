@@ -1,5 +1,8 @@
 
 local enable_path_while_walk = true
+local enable_overgrow = true
+local overgrow_min = 60*60*24
+local overgrow_max = 60*60*48
 
 --
 -- List of shovels
@@ -19,16 +22,19 @@ local shovels = {
 --
 
 local nodes = {}
-nodes["default:dirt"] = {count = 6, replace = "trample_path:dirt"}
+nodes["default:dirt"] = {count = 2, replace = "trample_path:dirt"}
 nodes["default:dirt_with_grass"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_dry_grass"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_rainforest_litter"] = {count = 6, replace = "default:dirt"}
 nodes["default:dirt_with_snow"] = {count = 3, replace = "trample_path:dirt_with_snow"}
+nodes["default:snowblock"] = {count = 3, replace = "trample_path:snowblock"}
+nodes["trample_path:dirt_with_snow"] = {count = 5, replace = "trample_path:dirt"}
 nodes["default:sand"] = {count = 4, replace = "trample_path:sand"}
 nodes["default:desert_sand"] = {count = 4, replace = "trample_path:desert_sand"}
 nodes["default:silver_sand"] = {count = 4, replace = "trample_path:silver_sand"}
 nodes["default:gravel"] = {count = 10, replace = "trample_path:gravel"}
 nodes["default:snow"] = {count = 2, replace = "trample_path:snow"}
+nodes["trample_path:snow"] = {count = 3, replace = "air"}
 nodes["default:grass_1"] = {count = 1, replace = "air"}
 nodes["default:grass_2"] = {count = 1, replace = "air"}
 nodes["default:grass_3"] = {count = 2, replace = "air"}
@@ -90,7 +96,7 @@ end
 
 local function replace_node(node, pos)
 	if node.param2 > nodes[node.name].count then
-		minetest.swap_node(pos, {name = nodes[node.name].replace})
+		minetest.set_node(pos, {name = nodes[node.name].replace})
 	else
 		minetest.swap_node(pos, {name = node.name, param2 = node.param2 + 1})
 	end
@@ -146,6 +152,14 @@ minetest.register_node("trample_path:dirt", {
 			{-0.5, -0.5, -0.5,  0.5, 0.5 - 1/16, 0.5},
 		},
 	},
+	on_construct  = function(pos)
+		if enable_overgrow then
+			minetest.get_node_timer(pos):start(math.random(overgrow_min, overgrow_max))
+		end
+	end,
+	on_timer = function(pos,elapsed)
+		minetest.set_node(pos, {name = "default:dirt"})
+	end
 })
 
 minetest.register_node("trample_path:gravel", {
@@ -294,4 +308,3 @@ minetest.register_node("trample_path:snowblock", {
 		},
 	},
 })
-

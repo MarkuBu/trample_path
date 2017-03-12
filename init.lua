@@ -33,14 +33,14 @@ nodes["default:grass_2"] = {count = 1, replace = "air"}
 nodes["default:grass_3"] = {count = 2, replace = "air"}
 nodes["default:grass_4"] = {count = 2, replace = "air"}
 nodes["default:grass_5"] = {count = 3, replace = "air"}
-nodes["default:flowers:rose"] = {count = 1, replace = "air"}
-nodes["default:flowers:tulip"] = {count = 1, replace = "air"}
-nodes["default:flowers:dandelion_yellow"] = {count = 1, replace = "air"}
-nodes["default:flowers:geranium"] = {count = 1, replace = "air"}
-nodes["default:flowers:viola"] = {count = 1, replace = "air"}
-nodes["default:flowers:dandelion_white"] = {count = 1, replace = "air"}
-nodes["default:flowers:mushroom_red"] = {count = 1, replace = "air"}
-nodes["default:flowers:mushroom_brown"] = {count = 1, replace = "air"}
+nodes["flowers:rose"] = {count = 1, replace = "air"}
+nodes["flowers:tulip"] = {count = 1, replace = "air"}
+nodes["flowers:dandelion_yellow"] = {count = 1, replace = "air"}
+nodes["flowers:geranium"] = {count = 1, replace = "air"}
+nodes["flowers:viola"] = {count = 1, replace = "air"}
+nodes["flowers:dandelion_white"] = {count = 1, replace = "air"}
+nodes["flowers:mushroom_red"] = {count = 1, replace = "air"}
+nodes["flowers:mushroom_brown"] = {count = 1, replace = "air"}
 
 --
 -- Overwrite items
